@@ -31,7 +31,7 @@ org.gradle.parallel=true
 ```
 
 ## Einzelnes Modul
-Wenn du in einem Single-Module-Project surf-api nutzen möchtest, sollte deine Ordner Struktur vorerst so aussehen:
+Wenn du in einem Single-Module-Project surf-api nutzen möchtest, sollte deine Ordnerstruktur vorerst so aussehen:
 
 ```
 └── my-project/
