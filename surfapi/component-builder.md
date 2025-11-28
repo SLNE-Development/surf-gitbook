@@ -41,8 +41,8 @@ Jede [Standartfarbe ](farbdesign.md)besitzt eine zugehörige Farb-Funktion welch
 | error(text: Any)         | Error (#ee3d51)     |
 | variableKey(text: Any)   | Info (#40d1db)      |
 | variableValue(text: Any) | Warning (#f9c353)   |
-| spacer(text: Any)        | Gray (GRAY)         |
-| darkSpacer(text: Any)    | Dark Gray (GRAY)    |
+| spacer(text: Any)        | Gray (#AAAAAA)      |
+| darkSpacer(text: Any)    | Dark Gray (#555555) |
 
 Außerdem gibt es Zusatz-Funktionen:
 
