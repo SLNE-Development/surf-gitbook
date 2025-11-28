@@ -15,3 +15,12 @@
 * [Spielerinteraktionen](spielerinteraktionen.md)
 * [Component Builder](component-builder.md)
 * [Farbdesign](farbdesign.md)
+* [Erweiterungen](erweiterungen.md)
+
+## Erweiterte Funktionen
+
+* [Config Api](erweiterte-funktionen/config-api.md)
+
+***
+
+* [Glowing Api](glowing-api.md)
