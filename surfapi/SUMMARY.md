@@ -9,3 +9,9 @@
 * [Versionsformat](getting-started/versioning.md)
 
 ## Grundlagen
+
+***
+
+* [Spielerinteraktionen](spielerinteraktionen.md)
+* [Component Builder](component-builder.md)
+* [Farbdesign](farbdesign.md)
