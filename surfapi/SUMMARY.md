@@ -16,6 +16,7 @@
 * [Component Builder](component-builder.md)
 * [Farbdesign](farbdesign.md)
 * [Erweiterungen](erweiterungen.md)
+* [PlayerLookupService](playerlookupservice.md)
 
 ## Erweiterte Funktionen
 
@@ -26,3 +27,4 @@
 * [Glowing Api](glowing-api.md)
 * [Inventory/Gui Api](inventory-gui-api.md)
 * [Dialog Framework](dialog-framework.md)
+* [Scoreboard Framework](scoreboard-framework.md)

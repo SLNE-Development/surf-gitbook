@@ -32,6 +32,7 @@ FastUtil Extensions
 Andere Extensions
 
 * random: Globales SecureRandom
+* String#toSmallCaps: Setzt die Font des Strings zu Smallcaps
 
 #### platformspezifische Erweiterungen (Paper)
 
