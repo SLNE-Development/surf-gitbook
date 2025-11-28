@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Code of Conduct](README.md)
+* [Willkommen](README.md)
 
 ## Getting Started
 
