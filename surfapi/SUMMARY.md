@@ -24,3 +24,5 @@
 ***
 
 * [Glowing Api](glowing-api.md)
+* [Inventory/Gui Api](inventory-gui-api.md)
+* [Dialog Framework](dialog-framework.md)
