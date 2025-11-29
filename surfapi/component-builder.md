@@ -29,6 +29,39 @@ player.sendText {
 }
 ```
 
+{% code title="Nachricht mit Hover-Text" %}
+```kotlin
+buildText { 
+    appendPrefix()
+    success("Du wurdest")
+    appendSpace()
+    variableValue("zur Whitelist")
+    appendSpace()
+    success("hinzugefügt.")
+    hoverEvent(buildText {
+        success("Es hat geklappt!")
+    })
+}
+```
+{% endcode %}
+
+{% code title="Nachricht mit Hover-Event und Klick-Action" %}
+```kotlin
+buildText { 
+    appendPrefix()
+    success("Du wurdest")
+    appendSpace()
+    variableValue("zur Whitelist")
+    appendSpace()
+    success("hinzugefügt.")
+    hoverEvent(buildText {
+        error("Klicke, um dich wieder zu entfernen.")
+    })
+    clickRunsCommand("/whitelist remove $playerName")
+}
+```
+{% endcode %}
+
 Jede [Standartfarbe ](farbdesign.md)besitzt eine zugehörige Farb-Funktion welche im Component Builder genutzt werden.
 
 | Methode                  | Farbe               |
