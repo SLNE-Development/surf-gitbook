@@ -24,7 +24,7 @@ fun removeGlowing(location: Location, viewer: Player)
 ```
 {% endcode %}
 
-{% code title="Beispiel" fullWidth="true" expandable="true" %}
+{% code title="Beispiel" fullWidth="false" %}
 ```kotlin
 glowingApi.makeGlowing(player, viewer, NamedTextColor.RED)
 
