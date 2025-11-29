@@ -25,7 +25,7 @@ metaLinks:
 
 In surf-api gibt es verschiedene Arten von Modulen, die jeweils unterschiedliche Funktionen und Anwendungsbereiche haben.
 
-### Api Module
+## Api Module
 
 Das Api-Modul des Projektes kann veröffentlicht werden und Zugriff auf die Funktionen des Projektes bieten. Basisklassen, welche in jedem Modul benötigt werden, sowohl welche die Api nutzen, als auch welche die nur intern genutzt werden, sollten in diesem Modul liegen. Das Api-Modul sollte die [`core`](installation.md) Abhängigkeit beinhalten.
 
