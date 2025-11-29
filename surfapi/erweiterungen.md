@@ -9,11 +9,11 @@ icon: plus
 **Location Extensions**
 
 * `Location#distanceSquared`: Distanz von einem Ort zu einem anderen, quadriert
-* <kbd>`Location#distance`</kbd>: Distanz von einem Ort zum anderen
+* `Location#distance`: Distanz von einem Ort zum anderen
 
 Datum Extensions
 
-* <kbd>`dateTimeFormatter`</kbd>: Globaler Zeit & Datum Formatter nach Europäischem Format
+* `dateTimeFormatter`: Globaler Zeit & Datum Formatter nach Europäischem Format
 * `currentDateTimeFormatted`: Aktuelle Uhrzeit & Datum formatiert mit dem dateTimeFormatter
 
 Service Extensions
