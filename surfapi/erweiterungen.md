@@ -41,3 +41,4 @@ Andere Extensions
 * Location#chuckX: Berechnet die Chunk X Koordinate des Ortes
 * Location#chuckZ: Berechnet die Chunk Z Koordinate des Ortes
 * Location#toVector3d: Wandelt die Location in einen drei dimensionalen Vector um
+* Listener#register: Registriert den Listener
