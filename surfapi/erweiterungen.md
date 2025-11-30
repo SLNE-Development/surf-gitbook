@@ -38,7 +38,7 @@ Andere Extensions
 
 * `key(name: String)`: Erstellt einen NameSpacedKey vom ProvidingPlugin mit dem angegeben Namen
 * `forEachPlayer`: Geht alle Spieler des Servers durch und führt die angegebene Aktion mit ihnen aus
-* `Location#chuckX`: Berechnet die Chunk X Koordinate des Ortes
-* `Location#chuckZ`: Berechnet die Chunk Z Koordinate des Ortes
+* `Location#chunkX`: Berechnet die Chunk X Koordinate des Ortes
+* `Location#chunkZ`: Berechnet die Chunk Z Koordinate des Ortes
 * `Location#toVector3d`: Wandelt die Location in einen drei dimensionalen Vector um
 * `Listener#register`: Registriert den Listener
