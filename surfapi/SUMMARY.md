@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Willkommen](README.md)
+* [Willkommen bei surf-api](README.md)
 
 ## Getting Started
 
