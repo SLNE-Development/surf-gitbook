@@ -9,7 +9,7 @@ icon: window-frame
 # Dialog Framework
 
 {% hint style="danger" %}
-Dieser Eintrag ist noch unvollständig in wird derzeit erarbeitet.
+Dieser Eintrag ist noch unvollständig und wird derzeit erarbeitet.
 {% endhint %}
 
 ## Grundstruktur
