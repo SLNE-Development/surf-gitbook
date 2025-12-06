@@ -12,6 +12,8 @@ icon: window-frame
 Dieser Eintrag ist noch unvollständig in wird derzeit erarbeitet.
 {% endhint %}
 
+## Grundstruktur
+
 Ein Dialog besteht immer aus:
 
 1. **Base**
@@ -29,10 +31,6 @@ Ein Dialog besteht immer aus:
    * Commands, Suggest, Konfiguration, Teleport, Permission Checks
 4. **Builder-DSL**
    * Einheitliche, intuitive Kotlin-DSL
-
-***
-
-### Grundstruktur
 
 ```kotlin
 val dialog = dialog {
