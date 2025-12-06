@@ -122,9 +122,7 @@ surfConfigApi.getSpongeConfig<MyConfig>()
 ```kotlin
 data class MyConfig(val enabled: Boolean = true)
 
-val api = surfConfigApi
-
-val config = api.createSpongeYmlConfig<MyConfig>(
+val config = surfConfigApi.createSpongeYmlConfig<MyConfig>(
     configFolder = Path.of("configs"),
     configFileName = "myconfig.yml"
 )
