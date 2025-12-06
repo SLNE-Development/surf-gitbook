@@ -87,9 +87,6 @@ val dialog = dialog {
     type {
         notice {
             label { text("Ok") }
-            action {
-                suggestCommand("/pvp")
-            }
         }
     }
 }
@@ -217,7 +214,6 @@ val dialog = dialog {
         confirmation {
             yes {
                 label { text("Ja") }
-                action { commandTemplate("ban {player}") }
             }
             no {
                 label { text("Nein") }
@@ -261,12 +257,10 @@ val adminTools = dialog {
 
             action {
                 label { text("Teleport") }
-                action { suggestCommand("/tp {player}") }
             }
 
             action {
                 label { text("Inventar") }
-                action { commandTemplate("openinv {player}") }
             }
 
             exitAction {
