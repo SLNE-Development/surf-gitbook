@@ -60,7 +60,7 @@ pluginManagement {
 }
 ```
 
-In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die Version aus deiner <kbd>gradle.properties</kbd> verwenden.
+In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die Version aus deiner `gradle.properties` verwenden.
 
 ```kts
 plugins {
@@ -114,18 +114,14 @@ buildscript {
         classpath("dev.slne.surf:surf-api-gradle-plugin:<VERSION>")
     }
 }
-```
 
-Die neuste surf-api Version findest du hier [Surf Maven](https://repo.slne.dev/#browse/browse:maven-public:dev%2Fslne%2Fsurf%2Fsurf-api-gradle-plugin). Um die neuste Version des Major Updates zu nutzen, nutze `<MC-VERSION>+` (z.b. 1.21.11+).
-
-In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die Version aus deiner <kbd>gradle.properties</kbd> verwenden.
-
-```kts
 allprojects {
     group = "dev.slne.surf"
     version = findProperty("version") as String
 }
 ```
+
+Die neuste surf-api Version findest du hier [Surf Maven](https://repo.slne.dev/#browse/browse:maven-public:dev%2Fslne%2Fsurf%2Fsurf-api-gradle-plugin). Um die neuste Version des Major Updates zu nutzen, nutze `<MC-VERSION>+` (z.b. 1.21.11+).
 
 {% hint style="warning" %}
 Bitte beachte, dass nur die neuste surf-api Version unterstützt wird.
