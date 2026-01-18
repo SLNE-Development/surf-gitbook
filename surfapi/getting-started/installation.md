@@ -51,12 +51,6 @@ pluginManagement {
         gradlePluginPortal()
         maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
     }
-    plugins {
-        id("dev.slne.surf.surf-api-gradle-plugin") version "1.21.11+"
-        // Wichtig: Hier das plugin angeben, welches für das single module verwendet werden soll.
-        // Bspw. core, paper-plugin, paper-raw, etc.
-        id("dev.slne.surf.surfapi.gradle.core") version "1.21.11+"
-    }
 }
 ```
 
@@ -64,8 +58,7 @@ In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die V
 
 ```kts
 plugins {
-    // Das im Pluginmanagement angegebene Plugin
-    id("dev.slne.surf.surfapi.gradle.core")
+    id("dev.slne.surf.surfapi.gradle.core") version "1.21.11+"
 }
 
 group = "dev.slne.surf"
