@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-* [Installationnnnnn](getting-started/installation.md)
+* [Installation](getting-started/installation.md)
 * [Modul Arten](getting-started/module-types.md)
 * [Versionsformat](getting-started/versioning.md)
 
