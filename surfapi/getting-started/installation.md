@@ -1,19 +1,5 @@
 ---
 icon: bolt
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
 metaLinks:
   alternates:
     - https://app.gitbook.com/s/yE16Xb3IemPxJWydtPOj/getting-started/quickstart
@@ -51,6 +37,11 @@ pluginManagement {
         gradlePluginPortal()
         maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
     }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+    id("dev.slne.surf.surfapi.gradle.settings") version "1.21.11+"
 }
 ```
 
@@ -93,6 +84,22 @@ Wenn du in einem Multi-Module-Project surf-api nutzen möchtest, sollte deine Or
     ├── gradle.properties
     ├── build.gradle.kts
     └── settings.gradle.kts
+```
+
+Als erstes fügst du in deiner `settings.gradle.kts` die Abhängigkeit zu surf-api hinzu.
+
+```kts
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
+    }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+    id("dev.slne.surf.surfapi.gradle.settings") version "<VERSION>"
+}
 ```
 
 Füge anschließend in der `build.gradle.kts` Datei im Hauptverzeichnis deines Projektes die Abhängigkeit für surf-api hinzu:
