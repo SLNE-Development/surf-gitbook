@@ -10,8 +10,6 @@
 
 ## Grundlagen
 
-***
-
 * [Spielerinteraktionen](spielerinteraktionen.md)
 * [Component Builder](component-builder.md)
 * [Farbdesign](farbdesign.md)

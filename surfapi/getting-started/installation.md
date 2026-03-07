@@ -42,7 +42,7 @@ pluginManagement {
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
     id("dev.slne.surf.surfapi.gradle.settings") version "1.21.11+"
-}
+} 
 ```
 
 In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die Version aus deiner `gradle.properties` verwenden.
