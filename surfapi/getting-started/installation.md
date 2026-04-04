@@ -41,7 +41,7 @@ pluginManagement {
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.slne.surf.surfapi.gradle.settings") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.settings") version "<VERSION>"
 }
 ```
 
@@ -49,7 +49,7 @@ In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die V
 
 ```kts
 plugins {
-    id("dev.slne.surf.surfapi.gradle.core") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.core") version "<VERSION>"
 }
 
 group = "dev.slne.surf"
@@ -98,7 +98,7 @@ pluginManagement {
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.slne.surf.surfapi.gradle.settings") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.settings") version "<VERSION>"
 }
 ```
 
@@ -133,7 +133,7 @@ Füge anschließend in deiner `build.gradle.kts` Datei des entsprechenden Moduls
 
 ```kotlin
 plugins {
-    id("dev.slne.surf.surfapi.gradle.paper-plugin")
+    id("dev.slne.surf.api.gradle.paper-plugin")
 }
 
 surfPaperPluginApi {
@@ -149,23 +149,23 @@ Verfügbare Plattformen:
 
 ```kotlin
 plugins {
-    id("dev.slne.surf.surfapi.gradle.core") // for core modules (applies kotlin and other plugins, adds surf-core-api compileOnly dependency)
+    id("dev.slne.surf.api.gradle.core") // for core modules (applies kotlin and other plugins, adds surf-core-api compileOnly dependency)
 }
 
 plugins {
-  id("dev.slne.surf.surfapi.gradle.paper-plugin") // for paper plugin modules (all core features, adds paper-api dependency, generation of paper-plugin.yml and runServer configuration)
+  id("dev.slne.surf.api.gradle.paper-plugin") // for paper plugin modules (all core features, adds paper-api dependency, generation of paper-plugin.yml and runServer configuration)
 }
 
 plugins {
-  id("dev.slne.surf.surfapi.gradle.paper-raw") // for paper plugin modules (all core features, adds paper-api dependency, NO generation of paper-plugin.yml nor runServer configuration)
+  id("dev.slne.surf.api.gradle.paper-raw") // for paper plugin modules (all core features, adds paper-api dependency, NO generation of paper-plugin.yml nor runServer configuration)
 }
 
 plugins {
-  id("dev.slne.surf.surfapi.gradle.standalone") //  for standalone modules (all core features, adds surf-core-api dependency, shades surf-api-standalone)
+  id("dev.slne.surf.api.gradle.standalone") //  for standalone modules (all core features, adds surf-core-api dependency, shades surf-api-standalone)
 }
 
 plugins {
-  id("dev.slne.surf.surfapi.gradle.velocity") // for velocity modules (all core features, adds velocity-api dependency)
+  id("dev.slne.surf.api.gradle.velocity") // for velocity modules (all core features, adds velocity-api dependency)
 }
 
 ```
