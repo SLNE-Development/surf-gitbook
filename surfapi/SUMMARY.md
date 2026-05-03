@@ -19,6 +19,7 @@
 ## Erweiterte Funktionen
 
 * [Config Api](erweiterte-funktionen/config-api.md)
+* [Component System](erweiterte-funktionen/component-system.md)
 
 ***
 

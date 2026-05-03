@@ -1,23 +1,9 @@
 ---
 icon: hand-wave
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
 metaLinks: {}
 ---
 
-# Willkommen
+# Willkommen bei surf-api
 
 Willkommen in der Surf Api Dokumentation. Hier findest du Informationen zur Nutzung der Api, Beispiele und Anleitungen zur Integration in deine Projekte.
 
