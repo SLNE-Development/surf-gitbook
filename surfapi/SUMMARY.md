@@ -7,6 +7,7 @@
 * [Installation](getting-started/installation.md)
 * [Modul Arten](getting-started/module-types.md)
 * [Versionsformat](getting-started/versioning.md)
+* [Build, Publish and Release Gradle Modules](getting-started/build-publish-and-release-gradle-modules.md)
 
 ## Grundlagen
 
