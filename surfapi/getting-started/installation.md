@@ -35,13 +35,13 @@ Füge anschließend in deiner `settings.gradle.kts` Datei die Abhängigkeit für
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
+        maven("https://reposiltie.slne.dev/releases")
     }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.slne.surf.api.gradle.settings") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.settings") version "+"
 }
 ```
 
@@ -49,10 +49,10 @@ In deiner `build.gradle.kts`, kannst du nun mit folgendem Codeblock direkt die V
 
 ```kts
 plugins {
-    id("dev.slne.surf.api.gradle.core") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.core") version "+"
 }
 
-group = "dev.slne.surf"
+group = "dev.slne.surf.example"
 version = findProperty("version") as String
 ```
 
@@ -92,13 +92,13 @@ Als erstes fügst du in deiner `settings.gradle.kts` die Abhängigkeit zu surf-a
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
+        maven("https://reposilite.slne.dev/repository/maven-public/") { name = "maven-public" }
     }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.slne.surf.api.gradle.settings") version "<VERSION>"
+    id("dev.slne.surf.api.gradle.settings") version "+"
 }
 ```
 
@@ -108,7 +108,7 @@ Füge anschließend in der `build.gradle.kts` Datei im Hauptverzeichnis deines P
 buildscript {
     repositories {
         gradlePluginPortal()
-        maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
+        maven("https://reposilite.slne.dev/releases)
     }
     dependencies {
         classpath("dev.slne.surf:surf-api-gradle-plugin:<VERSION>")
@@ -116,12 +116,10 @@ buildscript {
 }
 
 allprojects {
-    group = "dev.slne.surf"
+    group = "dev.slne.surf.example"
     version = findProperty("version") as String
 }
 ```
-
-Die neuste surf-api Version findest du hier [Surf Maven](https://repo.slne.dev/#browse/browse:maven-public:dev%2Fslne%2Fsurf%2Fsurf-api-gradle-plugin). Um die neuste Version des Major Updates zu nutzen, nutze `<MC-VERSION>+` (z.b. 1.21.11+).
 
 {% hint style="warning" %}
 Bitte beachte, dass nur die neuste surf-api Version unterstützt wird.
