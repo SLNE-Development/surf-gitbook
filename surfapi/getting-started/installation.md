@@ -1,8 +1,26 @@
 ---
 icon: bolt
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 metaLinks:
   alternates:
-    - https://app.gitbook.com/s/yE16Xb3IemPxJWydtPOj/getting-started/quickstart
+    - /broken/spaces/yE16Xb3IemPxJWydtPOj/pages/7FvWQMF0kTK7HGhlQfmo
 ---
 
 # Installation
@@ -92,7 +110,7 @@ Als erstes fügst du in deiner `settings.gradle.kts` die Abhängigkeit zu surf-a
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://reposilite.slne.dev/repository/maven-public/") { name = "maven-public" }
+        maven("https://reposilite.slne.dev/releases/") { name = "maven-public" }
     }
 }
 
@@ -108,10 +126,10 @@ Füge anschließend in der `build.gradle.kts` Datei im Hauptverzeichnis deines P
 buildscript {
     repositories {
         gradlePluginPortal()
-        maven("https://reposilite.slne.dev/releases)
+        maven("https://reposilite.slne.dev/releases")
     }
     dependencies {
-        classpath("dev.slne.surf:surf-api-gradle-plugin:<VERSION>")
+        classpath("dev.slne.surf:surf-api-gradle-plugin:+")
     }
 }
 
