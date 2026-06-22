@@ -53,7 +53,7 @@ Füge anschließend in deiner `settings.gradle.kts` Datei die Abhängigkeit für
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://reposiltie.slne.dev/releases")
+        maven("https://reposilite.slne.dev/releases/") { name = "maven-public" }
     }
 }
 
