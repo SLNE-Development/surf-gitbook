@@ -48,6 +48,7 @@ Das Objekt `SettingKeys` enthält alle standardmäßig registrierten [`SettingKe
 ## Verwendung
 
 ```kotlin
+import dev.slne.surf.settings.api.SurfSettingsApi
 import dev.slne.surf.settings.api.setting.SettingKeys
 
 // Wert eines Schlüssels lesen
