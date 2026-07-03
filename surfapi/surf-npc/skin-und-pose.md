@@ -16,7 +16,7 @@ Ein `NpcSkin` enthält die Skin-Daten eines Minecraft-Spielers: `value`, `signat
 ```kotlin
 import dev.slne.surf.npc.api.dsl.fetchedSkin
 
-// In der DSL (suspend)
+// DSL-Helper (suspend, z. B. vor dem npc { }-Block)
 val skin = fetchedSkin("Notch")
 
 // Über die API direkt
