@@ -85,7 +85,7 @@ import dev.slne.surf.npc.api.npc.NpcPose
 myNpc.setPose(NpcPose.SITTING)
 
 // Aktuelle Pose lesen
-val aktuellepose: NpcPose = myNpc.getPose()
+val aktuellePose: NpcPose = myNpc.getPose()
 ```
 
 ### Beispiel: NPC der winkt und schläft
