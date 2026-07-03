@@ -32,11 +32,7 @@ val myNpc = npc {
         z(200.0)
         yaw(0f)
         pitch(0f)
-    }
-
-    skin = fetchedSkin("Notch")   // Skin eines Spielers laden (suspend)
-
-    rotationType = NpcRotationType.PER_PLAYER
+    skin = dev.slne.surf.npc.api.npc.skin.NpcSkin.empty() // Skin vorher via SurfNpcApi.fetchSkin("Notch") (suspend) laden und dann hier zuweisen
     persistent   = true
 }
 ```
