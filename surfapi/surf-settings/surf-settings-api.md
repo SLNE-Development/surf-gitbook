@@ -15,6 +15,7 @@ Die API ist über das Companion-Objekt direkt erreichbar:
 
 ```kotlin
 import dev.slne.surf.settings.api.SurfSettingsApi
+import dev.slne.surf.settings.api.setting.SettingKeys
 
 val value = SurfSettingsApi.getSettingValue(player.uniqueId, SettingKeys.CHAT_PINGS)
 ```
