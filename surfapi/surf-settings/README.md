@@ -7,7 +7,7 @@ icon: sliders
 
 # surf-settings
 
-surf-settings ist ein Plugin-Modul, das eine typsichere und erweiterbare Einstellungsverwaltung für Spieler bereitstellt. Einstellungen werden persistent in einer Datenbank gespeichert und können über ein integriertes GUI oder direkt über die API abgerufen und gesetzt werden.
+surf-settings ist ein Feature von surf-player, das eine typsichere und erweiterbare Einstellungsverwaltung für Spieler bereitstellt. Einstellungen werden persistent in einer Datenbank gespeichert und können über ein integriertes GUI oder direkt über die API abgerufen und gesetzt werden.
 
 ### Übersicht
 
@@ -15,18 +15,29 @@ surf-settings ist ein Plugin-Modul, das eine typsichere und erweiterbare Einstel
 
 ### Installation
 
-Füge surf-settings als Abhängigkeit in deiner `build.gradle.kts` hinzu:
+surf-settings ist Teil von **surf-player** (Monorepo [SLNE-Development/surf-player](https://github.com/SLNE-Development/surf-player)). Füge `surf-player-api` als Abhängigkeit in deiner `build.gradle.kts` hinzu:
 
 ```kotlin
+repositories {
+    maven("https://reposilite.slne.dev/releases")
+}
+
 dependencies {
-    compileOnly("dev.slne.surf:surf-settings-api:+")
+    compileOnly("dev.slne.surf.player:surf-player-api:1.0.3")
 }
 ```
 
+Das Artefakt `dev.slne.surf:surf-settings-api` existiert nicht mehr. Die Klassen liegen jetzt im Paket `dev.slne.surf.player.api.settings`.
+
 {% hint style="info" %}
-surf-settings setzt surf-core voraus. Stelle sicher, dass das Plugin auf dem Server läuft, bevor du es als Abhängigkeit verwendest.
+Das Plugin deiner Plattform muss auf dem Server laufen, bevor du es als Abhängigkeit verwendest: `surf-player-paper`, `surf-player-minestom` oder `surf-player-velocity`. Einstellungen sind auf allen drei Plattformen verfügbar. Die Einrichtung ist unter [Installation von surf-chat](../../surf-chat/getting-started/installation.md) beschrieben.
 {% endhint %}
+
+### Befehle
+
+Spieler öffnen das Menü mit `/settings`, setzen Werte mit `/settings toggle <einstellung> [an|aus]` und zeigen Infos mit `/settings info <einstellung>` an. Admins nutzen `/surfplayer settings refresh|list` (Velocity: `/surfplayervelocity settings ...`; früher `/surfSettings`).
 
 ### Externe Links
 
-* [GitHub – surf-settings API](https://github.com/SLNE-Development/surf-settings/tree/version/26.1/surf-settings-api)
+* [GitHub – Settings-API](https://github.com/SLNE-Development/surf-player/tree/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/settings)
+* [GitHub – Migration von Befehlen, Permissions und API](https://github.com/SLNE-Development/surf-player/blob/version/26.3/docs/command-migration.md)

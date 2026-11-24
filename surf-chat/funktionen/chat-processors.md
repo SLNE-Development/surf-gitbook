@@ -8,7 +8,7 @@ description: >-
 
 # Chat-Prozessoren
 
-surf-chat unterscheidet zwei Arten von Prozessoren: **Pre-Prozessoren** laufen, bevor eine Nachricht sichtbar wird, **Post-Prozessoren** laufen danach. Beide erhalten einen [`MessageContext`](../grundlagen/nachrichten.md#messagecontext).
+Die Chat-Funktion von surf-player unterscheidet zwei Arten von Prozessoren: **Pre-Prozessoren** laufen, bevor eine Nachricht sichtbar wird, **Post-Prozessoren** laufen danach. Beide erhalten einen [`MessageContext`](../grundlagen/nachrichten.md#messagecontext).
 
 ## PreChatProcessor
 
@@ -113,22 +113,13 @@ SurfChatApi.registerChatProcessor(logProcessor)
 
 ---
 
-## ChatProcessorRegistry
+## Registry
 
-Alle Prozessoren werden intern in der `ChatProcessorRegistry` verwaltet. Sie wird automatisch befüllt, wenn du Prozessoren über `SurfChatApi.registerChatProcessor(...)` registrierst.
-
-```kotlin
-// Alle registrierten Pre-Prozessoren
-chatProcessorRegistry.preChatProcessors
-
-// Alle registrierten Post-Prozessoren
-chatProcessorRegistry.postChatProcessors
-```
+Die Prozessoren werden intern verwaltet. Die früheren Klassen `ChatProcessorRegistry` und `chatProcessorRegistry` sind kein Teil der öffentlichen API mehr; registriere Prozessoren ausschließlich über `SurfChatApi.registerChatProcessor(...)`.
 
 ---
 
 ## Externe Links
 
-* [GitHub – PreChatProcessor.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/processor/PreChatProcessor.kt)
-* [GitHub – PostChatProcessor.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/processor/PostChatProcessor.kt)
-* [GitHub – ChatProcessorRegistry.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/processor/ChatProcessorRegistry.kt)
+* [GitHub – PreChatProcessor.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/processor/PreChatProcessor.kt)
+* [GitHub – PostChatProcessor.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/processor/PostChatProcessor.kt)

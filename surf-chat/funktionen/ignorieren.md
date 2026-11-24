@@ -7,7 +7,7 @@ description: >-
 
 # Ignore-Liste
 
-surf-chat verwaltet eine Ignore-Liste pro Spieler. Ignorierte Spieler sehen weder globale noch direkte Nachrichten des ignorierten Spielers.
+Die Chat-Funktion von surf-player verwaltet eine Ignore-Liste pro Spieler. Ignorierte Spieler sehen weder globale noch direkte Nachrichten des ignorierten Spielers.
 
 ## IgnoreListEntry
 
@@ -37,31 +37,31 @@ data class IgnoreListEntry(
 ### Gecachte Variante (synchron)
 
 ```kotlin
-fun getCachedIgnoreList(uuid: UUID): List<IgnoreListEntry>
+fun cachedIgnoreList(uuid: UUID): List<IgnoreListEntry>
 ```
 
-Gibt die lokal im Speicher gehaltene Ignore-Liste zurück. Für Online-Spieler ist diese immer aktuell.
+Gibt die lokal im Speicher gehaltene Ignore-Liste zurück. Für Online-Spieler ist diese immer aktuell. Alternativ: `SurfPlayerApi.player(uuid).cachedIgnoreList` (`ChatCapability`).
 
 ```kotlin
-val ignored = SurfChatApi.getCachedIgnoreList(player.uniqueId)
+val ignored = SurfChatApi.cachedIgnoreList(player.uniqueId)
 val isIgnoring = ignored.any { it.target == otherPlayer.uniqueId }
 ```
 
 ### Datenbankbasierte Variante (Suspend)
 
 ```kotlin
-suspend fun getIgnoreList(uuid: UUID): List<IgnoreListEntry>
+suspend fun ignoreList(uuid: UUID): List<IgnoreListEntry>
 ```
 
-Lädt die Ignore-Liste direkt aus der Datenbank. Nützlich für Offline-Spieler oder wenn der Cache möglicherweise veraltet ist.
+Lädt die Ignore-Liste und legt sie im Cache dieses Servers ab. Nützlich für Offline-Spieler oder wenn der Cache möglicherweise veraltet ist. Alternativ: `SurfPlayerApi.player(uuid).ignoreList()`.
 
 {% hint style="warning" %}
-`getIgnoreList` ist eine Suspend-Funktion und muss aus einem Coroutine-Kontext aufgerufen werden. Für Online-Spieler ist die gecachte Variante zu bevorzugen.
+`ignoreList` ist eine Suspend-Funktion und muss aus einem Coroutine-Kontext aufgerufen werden. Für Online-Spieler ist die gecachte Variante zu bevorzugen.
 {% endhint %}
 
 ```kotlin
 // Ignore-Liste eines offline Spielers laden
-val offlineIgnoreList = SurfChatApi.getIgnoreList(offlinePlayerUuid)
+val offlineIgnoreList = SurfChatApi.ignoreList(offlinePlayerUuid)
 ```
 
 ---
@@ -70,7 +70,7 @@ val offlineIgnoreList = SurfChatApi.getIgnoreList(offlinePlayerUuid)
 
 ```kotlin
 fun isIgnored(viewer: UUID, sender: UUID): Boolean {
-    return SurfChatApi.getCachedIgnoreList(viewer).any { it.target == sender }
+    return SurfChatApi.cachedIgnoreList(viewer).any { it.target == sender }
 }
 ```
 
@@ -88,7 +88,7 @@ object IgnoreListProcessor : PreChatProcessor {
         val sender = messageData.sender
         viewers.removeIf { audience ->
             val uuid = (audience as? Player)?.uniqueId ?: return@removeIf false
-            SurfChatApi.getCachedIgnoreList(uuid).any { it.target == sender }
+            SurfChatApi.cachedIgnoreList(uuid).any { it.target == sender }
         }
     }
 }
@@ -96,7 +96,13 @@ object IgnoreListProcessor : PreChatProcessor {
 
 ---
 
+## Befehle
+
+Spieler verwalten ihre Ignore-Liste mit `/ignore add <spieler>`, `/ignore remove <spieler>` und `/ignore list [seite]` (früher: `/ignore <spieler>` als Toggle und `/ignore #list`). Team-Mitglieder mit der Permission `surf.player.chat.ignore.exempt` können nicht ignoriert werden.
+
+---
+
 ## Externe Links
 
-* [GitHub – IgnoreListEntry.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/entry/IgnoreListEntry.kt)
-* [GitHub – SurfChatApi.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/SurfChatApi.kt)
+* [GitHub – IgnoreListEntry.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/entry/IgnoreListEntry.kt)
+* [GitHub – SurfChatApi.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/SurfChatApi.kt)

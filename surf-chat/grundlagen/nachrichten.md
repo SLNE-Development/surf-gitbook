@@ -2,7 +2,7 @@
 icon: envelope
 description: >-
   MessageData, MessageType und MessageContext sind die grundlegenden
-  Datenstrukturen von surf-chat. Sie repräsentieren Nachrichten und ihren
+  Datenstrukturen der Chat-Funktion von surf-player. Sie repräsentieren Nachrichten und ihren
   Verarbeitungskontext.
 ---
 
@@ -143,6 +143,6 @@ val adminProcessor = PostChatProcessor { context ->
 
 ## Externe Links
 
-* [GitHub – MessageData.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/MessageData.kt)
-* [GitHub – MessageContext.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/MessageContext.kt)
-* [GitHub – MessageType.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/MessageType.kt)
+* [GitHub – MessageData.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/MessageData.kt)
+* [GitHub – MessageContext.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/MessageContext.kt)
+* [GitHub – MessageType.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/MessageType.kt)

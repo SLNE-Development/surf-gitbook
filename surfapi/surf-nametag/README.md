@@ -1,108 +1,94 @@
 ---
 description: >-
-  surf-nametag ermöglicht die individuelle Steuerung von Namensschildern (Nametags)
-  für Spieler auf Packet-Ebene – pro Betrachter steuerbar.
+  surf-nametag steuert die Namensschilder (Nametags) von Spielern auf
+  Packet-Ebene. Die API ist Teil von surf-player.
 icon: tag
 ---
 
 # surf-nametag
 
-surf-nametag stellt eine schlanke API zur Verfügung, um Namensschilder von Spielern für einzelne Betrachter gezielt anzuzeigen, auszublenden oder mit individuellem Text zu überschreiben.
+surf-nametag ist Teil von **surf-player** (Monorepo [SLNE-Development/surf-player](https://github.com/SLNE-Development/surf-player)). Die API stellt Funktionen bereit, um die Namensschilder von Spielern zu steuern: Aktualisierungen anhalten und die Sichtbarkeit für alle Betrachter überschreiben.
 
 {% hint style="warning" %}
-surf-nametag ist nur auf der **Paper/Bukkit**-Plattform verfügbar.
+Die frühere API für einzelne Betrachter (`showNametag`, `hideNametag`, `setNametag`, `resetNametag`) und das Artefakt `dev.slne.surf:surf-nametag-api` gibt es nicht mehr. Nametags sind auf **Paper** und **Minestom** verfügbar, nicht auf Velocity.
 {% endhint %}
 
 ## Installation
 
 ```kotlin
+repositories {
+    maven("https://reposilite.slne.dev/releases")
+}
+
 dependencies {
-    compileOnly("dev.slne.surf:surf-nametag-api:+")
+    compileOnly("dev.slne.surf.player:surf-player-api:1.0.3")
 }
 ```
+
+Damit das Plugin vor deinem geladen wird, deklariere eine Abhängigkeit auf `surf-player-paper` (Paper) bzw. `surf-player-minestom` (Minestom). Die Einrichtung ist unter [Installation von surf-chat](../../surf-chat/getting-started/installation.md) beschrieben und gilt für alle Features von surf-player.
 
 ## API-Übersicht
 
 Die API ist über das Companion-Objekt von `SurfNametagApi` direkt erreichbar:
 
 ```kotlin
-import dev.slne.surf.nametag.api.SurfNametagApi
+import dev.slne.surf.player.api.nametag.SurfNametagApi
+import dev.slne.surf.player.api.nametag.nametag.NametagVisibility
 ```
 
-### Nametag anzeigen
+Alles, was einen einzelnen Spieler betrifft, ist zusätzlich über die `NametagCapability` erreichbar (`SurfPlayerApi.player(uuid)`).
+
+### Aktualisierungen anhalten
 
 ```kotlin
-fun showNametag(player: UUID, viewer: UUID)
+fun preventNametagUpdates(playerUuid: UUID)
+fun allowNametagUpdates(playerUuid: UUID)
 ```
 
-Zeigt das Namensschild von `player` für `viewer` an (falls es zuvor ausgeblendet wurde).
+`preventNametagUpdates` hält die Aktualisierung des Namensschilds von `playerUuid` an, bis `allowNametagUpdates` aufgerufen wird. Beide Funktionen geben `Unit` zurück (früher `Boolean`).
 
-### Nametag ausblenden
+### Sichtbarkeit überschreiben
 
 ```kotlin
-fun hideNametag(player: UUID, viewer: UUID)
+fun setNametagVisibility(playerUuid: UUID, visibility: NametagVisibility)
+fun resetNametagVisibility(playerUuid: UUID)
 ```
 
-Blendet das Namensschild von `player` für `viewer` aus. Andere Spieler sehen das Schild weiterhin.
+`setNametagVisibility` zeigt das Namensschild von `playerUuid` für **alle** Betrachter mit der angegebenen Sichtbarkeit an, statt der konfigurierten. Betrachter, die das Schild schon sehen, werden sofort aktualisiert. Die Überschreibung gilt bis `resetNametagVisibility` aufgerufen wird oder der Spieler den Server verlässt.
 
-### Nametag überschreiben
+| `NametagVisibility`    | Bedeutung                                           |
+| ---------------------- | --------------------------------------------------- |
+| `ALWAYS`               | Das Namensschild ist immer sichtbar                 |
+| `NEVER`                | Das Namensschild ist nie sichtbar                   |
+| `HIDE_FOR_OTHER_TEAMS` | Für Spieler anderer Teams ausgeblendet              |
+| `HIDE_FOR_OWN_TEAM`    | Für Spieler des eigenen Teams ausgeblendet          |
 
-```kotlin
-fun setNametag(player: UUID, viewer: UUID, nametag: Component)
-```
-
-Ersetzt das Namensschild von `player` für `viewer` mit einem eigenen [Adventure-Component](https://jd.advntr.dev/api/4.17.0/net/kyori/adventure/text/Component.html).
-
-```kotlin
-SurfNametagApi.setNametag(
-    player = player.uniqueId,
-    viewer = viewer.uniqueId,
-    nametag = Component.text("[Admin] ").color(NamedTextColor.RED)
-        .append(Component.text(player.name))
-)
-```
-
-### Nametag zurücksetzen
+## Beispiel
 
 ```kotlin
-fun resetNametag(player: UUID, viewer: UUID)
-```
+val player = SurfPlayerApi.player(targetUuid)
 
-Stellt das Standard-Namensschild von `player` für `viewer` wieder her.
+// Namensschild für alle ausblenden
+player.setNametagVisibility(NametagVisibility.NEVER)
 
-## Vollständiges Beispiel
+// Zurück zur konfigurierten Sichtbarkeit
+player.resetNametagVisibility()
 
-```kotlin
-import dev.slne.surf.nametag.api.SurfNametagApi
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
-
-// Nametag für einen bestimmten Spieler ausblenden
-SurfNametagApi.hideNametag(
-    player = targetPlayer.uniqueId,
-    viewer = observingPlayer.uniqueId
-)
-
-// Individuelles Nametag setzen (z. B. für eine Admin-Kennzeichnung)
-SurfNametagApi.setNametag(
-    player = targetPlayer.uniqueId,
-    viewer = observingPlayer.uniqueId,
-    nametag = Component.text("★ ").color(NamedTextColor.GOLD)
-        .append(Component.text(targetPlayer.name).color(NamedTextColor.WHITE))
-)
-
-// Zurücksetzen auf Standard
-SurfNametagApi.resetNametag(
-    player = targetPlayer.uniqueId,
-    viewer = observingPlayer.uniqueId
-)
+// Dasselbe ohne SurfCommunityPlayer
+SurfNametagApi.setNametagVisibility(targetUuid, NametagVisibility.NEVER)
+SurfNametagApi.resetNametagVisibility(targetUuid)
 ```
 
 {% hint style="info" %}
-Die Nametag-Sichtbarkeit kann auch über die Spielereinstellung `SettingKeys.SHOW_NAMETAGS` (surf-settings) gesteuert werden.
+Spieler können fremde Namensschilder über die Einstellung `SettingKeys.SHOW_NAMETAGS` (`nametag:show-nametags`) selbst ausblenden. Diese Einstellung wird jetzt tatsächlich ausgewertet; zuvor wurde sie von surf-nametag nie gelesen. Die Einstellungen sind unter [surf-settings](../surf-settings/README.md) beschrieben.
 {% endhint %}
+
+## Befehle
+
+Das Plugin kann mit `/surfplayer nametag reload` neu geladen werden (Permission `surf.player.admin.nametag.reload`).
 
 ## Externe Links
 
-* [GitHub – surf-nametag API](https://github.com/SLNE-Development/surf-nametag/tree/version/26.1/surf-nametag-api/src/main/kotlin/dev/slne/surf/nametag/api)
-* [GitHub – SurfNametagApi.kt](https://github.com/SLNE-Development/surf-nametag/blob/version/26.1/surf-nametag-api/src/main/kotlin/dev/slne/surf/nametag/api/SurfNametagApi.kt)
+* [GitHub – surf-player Repository](https://github.com/SLNE-Development/surf-player)
+* [GitHub – Nametag-API](https://github.com/SLNE-Development/surf-player/tree/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/nametag)
+* [GitHub – SurfNametagApi.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/nametag/SurfNametagApi.kt)

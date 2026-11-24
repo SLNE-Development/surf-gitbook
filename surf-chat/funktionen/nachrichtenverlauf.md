@@ -7,7 +7,7 @@ description: >-
 
 # Nachrichtenverlauf
 
-surf-chat speichert alle gesendeten Nachrichten persistent. Über `SurfChatApi.lookupHistory(...)` lässt sich der Verlauf gefiltert abrufen.
+Die Chat-Funktion von surf-player speichert alle gesendeten Nachrichten persistent. Über `SurfChatApi.lookupHistory(...)` lässt sich der Verlauf gefiltert abrufen. Für Admins gibt es zusätzlich `/surfplayer chat lookup [--filter wert ...]` (die verfügbaren Filter zeigt `/surfplayer chat filters [seite]`; früher `/surfchat lookup` und `/surfchat lookuphelp`).
 
 ## HistoryEntry
 
@@ -149,5 +149,5 @@ val conversation = SurfChatApi.lookupHistory(filter)
 
 ## Externe Links
 
-* [GitHub – HistoryEntry.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/entry/HistoryEntry.kt)
-* [GitHub – HistoryFilter.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/entry/HistoryFilter.kt)
+* [GitHub – HistoryEntry.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/entry/HistoryEntry.kt)
+* [GitHub – HistoryFilter.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/entry/HistoryFilter.kt)

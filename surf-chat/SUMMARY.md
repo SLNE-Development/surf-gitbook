@@ -18,4 +18,3 @@
 * [Message Redirector](funktionen/message-redirector.md)
 * [Nachrichtenverlauf](funktionen/nachrichtenverlauf.md)
 * [Ignore-Liste](funktionen/ignorieren.md)
-* [Denylist](funktionen/denylist.md)
