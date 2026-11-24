@@ -1,19 +1,28 @@
 ---
 icon: code
 description: >-
-  SurfChatApi ist die zentrale Schnittstelle von surf-chat. Sie erlaubt das
+  SurfChatApi ist die zentrale Schnittstelle der Chat-Funktion von surf-player. Sie erlaubt das
   Registrieren von Prozessoren, das Abrufen der Ignore-Liste sowie das Suchen
   im Nachrichtenverlauf.
 ---
 
 # SurfChatApi
 
-`SurfChatApi` ist das Hauptinterface von surf-chat. Es ist auf allen Plattformen über sein Companion-Objekt direkt zugänglich.
+`SurfChatApi` ist das Hauptinterface der Chat-Funktion von surf-player. Es ist auf Paper und Minestom über sein Companion-Objekt direkt zugänglich.
 
 ## Zugriff
 
 ```kotlin
-import dev.slne.surf.chat.api.SurfChatApi
+import dev.slne.surf.player.api.chat.SurfChatApi
+```
+
+Alles, was einen einzelnen Spieler betrifft, ist zusätzlich über die `ChatCapability` erreichbar (`SurfPlayerApi.player(uuid)`):
+
+```kotlin
+val player = SurfPlayerApi.player(uuid)
+
+player.cachedIgnoreList       // entspricht SurfChatApi.cachedIgnoreList(uuid)
+player.ignoreList()           // entspricht SurfChatApi.ignoreList(uuid)
 ```
 
 ---
@@ -32,14 +41,18 @@ Speichert eine Nachricht im Nachrichtenverlauf. Wird intern nach dem Versenden e
 
 ```kotlin
 suspend fun sendSignedMessage(
-    signedMessage: SignedMessage,
     senderUuid: UUID,
     targetUuid: UUID,
+    signedMessage: SignedMessage,
     contentComponent: Component
 )
 ```
 
-Versendet eine kryptografisch signierte Nachricht von einem Spieler an einen anderen. Die Signatur wird von Minecraft für die Chat-Authentifizierung verwendet.
+Versendet eine kryptografisch signierte Nachricht von einem Spieler an einen anderen. Die Signatur wird von Minecraft für die Chat-Authentifizierung verwendet. Der Absender muss auf diesem Server sein, der Empfänger kann irgendwo im Netzwerk sein.
+
+{% hint style="warning" %}
+Die Reihenfolge der Parameter hat sich gegenüber der alten surf-chat-API geändert: `signedMessage` steht jetzt nach `senderUuid` und `targetUuid`. Über die `ChatCapability` lautet der Aufruf `sendSignedMessage(targetUuid, signedMessage, contentComponent)`.
+{% endhint %}
 
 ### Nachricht löschen (lokal)
 
@@ -92,7 +105,7 @@ Registriert einen [`MessageRedirector`](../funktionen/message-redirector.md), de
 ### Gecachte Ignore-Liste abrufen
 
 ```kotlin
-fun getCachedIgnoreList(uuid: UUID): List<IgnoreListEntry>
+fun cachedIgnoreList(uuid: UUID): List<IgnoreListEntry>
 ```
 
 Gibt die lokal gecachte Ignore-Liste eines Spielers zurück. Diese Methode ist synchron und greift nur auf den In-Memory-Cache zu.
@@ -100,13 +113,13 @@ Gibt die lokal gecachte Ignore-Liste eines Spielers zurück. Diese Methode ist s
 ### Ignore-Liste laden
 
 ```kotlin
-suspend fun getIgnoreList(uuid: UUID): List<IgnoreListEntry>
+suspend fun ignoreList(uuid: UUID): List<IgnoreListEntry>
 ```
 
-Lädt die Ignore-Liste eines Spielers aus der Datenbank. Nützlich für Offline-Spieler oder wenn der Cache möglicherweise veraltet ist.
+Lädt die Ignore-Liste eines Spielers und legt sie im Cache dieses Servers ab. Nützlich für Offline-Spieler oder wenn der Cache möglicherweise veraltet ist.
 
 {% hint style="warning" %}
-`getIgnoreList` ist eine Suspend-Funktion und muss aus einem Coroutine-Kontext aufgerufen werden.
+`ignoreList` ist eine Suspend-Funktion und muss aus einem Coroutine-Kontext aufgerufen werden.
 {% endhint %}
 
 ---
@@ -152,10 +165,15 @@ val history = SurfChatApi.lookupHistory(filter)
 suspend fun passAutoMod(messageData: MessageData)
 ```
 
-Prüft eine Nachricht automatisch auf Verstöße (z. B. Denylist-Treffer, unerlaubte Links). Löst bei einem Treffer die konfigurierte Denylist-Aktion aus.
+Führt die KI-Moderation für die Nachricht aus. Sie läuft nur, wenn sie in der Konfiguration aktiviert ist (`enabled: true`) und ein API-Key hinterlegt ist.
+
+{% hint style="info" %}
+Die frühere Denylist (Wortlisten, Link- und Zeichenprüfung) gibt es in surf-player nicht mehr.
+{% endhint %}
 
 ---
 
 ## Externe Links
 
-* [GitHub – SurfChatApi.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/SurfChatApi.kt)
+* [GitHub – SurfChatApi.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/SurfChatApi.kt)
+* [GitHub – ChatCapability.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/ChatCapability.kt)

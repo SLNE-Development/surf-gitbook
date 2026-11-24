@@ -7,18 +7,33 @@ icon: gear
 
 # SurfSettingsApi
 
-`SurfSettingsApi` ist das Hauptinterface von surf-settings. Es erlaubt den typsicheren Zugriff auf Spielereinstellungen, das persistente Speichern von Werten sowie das Öffnen des Einstellungs-GUIs.
+`SurfSettingsApi` ist das Hauptinterface der Settings-Funktion von surf-player. Es erlaubt den typsicheren Zugriff auf Spielereinstellungen, das persistente Speichern von Werten sowie das Öffnen des Einstellungs-GUIs.
 
 ## Zugriff
 
 Die API ist über das Companion-Objekt direkt erreichbar:
 
 ```kotlin
-import dev.slne.surf.settings.api.SurfSettingsApi
-import dev.slne.surf.settings.api.setting.SettingKeys
+import dev.slne.surf.player.api.settings.SurfSettingsApi
+import dev.slne.surf.player.api.settings.setting.SettingKeys
 
 val value = SurfSettingsApi.getSettingValue(player.uniqueId, SettingKeys.CHAT_PINGS)
 ```
+
+Alles, was einen einzelnen Spieler betrifft, ist zusätzlich über die `SettingsCapability` erreichbar (`SurfPlayerApi.player(uuid)`):
+
+```kotlin
+val player = SurfPlayerApi.player(player.uniqueId)
+
+player.setting(SettingKeys.CHAT_PINGS)                // gecachter Wert
+player.loadSetting(SettingKeys.CHAT_PINGS)            // lädt den Wert zuerst (suspend)
+player.saveSetting(SettingKeys.CHAT_PINGS, false)     // speichern (suspend)
+player.openSettingsMenu()
+```
+
+{% hint style="warning" %}
+Die alten, veralteten Methoden mit `String`-Namen oder `PlayerSetting` (`getPlayerSettings`, `getPlayerSetting`, `saveSetting(uuid, name, value)`, `createSetting(name, default)`, `getSetting(name)`) und `deleteSetting` gibt es nicht mehr. Nutze die typsicheren `SettingKey`-Varianten unten.
+{% endhint %}
 
 ## Methoden
 
@@ -104,9 +119,9 @@ SurfSettingsApi.openSettingsGui(player.uniqueId)
 ## Vollständiges Beispiel
 
 ```kotlin
-import dev.slne.surf.settings.api.SurfSettingsApi
-import dev.slne.surf.settings.api.setting.SettingKey
-import dev.slne.surf.settings.api.setting.SettingKeys
+import dev.slne.surf.player.api.settings.SurfSettingsApi
+import dev.slne.surf.player.api.settings.setting.SettingKey
+import dev.slne.surf.player.api.settings.setting.SettingKeys
 import net.kyori.adventure.key.Key
 
 // Eigenen Key definieren
@@ -133,4 +148,5 @@ suspend fun disableFeature(playerUuid: UUID) {
 
 ## Externe Links
 
-* [GitHub – SurfSettingsApi.kt](https://github.com/SLNE-Development/surf-settings/blob/version/26.1/surf-settings-api/src/main/kotlin/dev/slne/surf/settings/api/SurfSettingsApi.kt)
+* [GitHub – SurfSettingsApi.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/settings/SurfSettingsApi.kt)
+* [GitHub – SettingsCapability.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/settings/SettingsCapability.kt)

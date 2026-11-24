@@ -69,4 +69,4 @@ Zwei `SettingKey`-Instanzen gelten als gleich, wenn ihr `key` identisch ist. Der
 
 ## Externe Links
 
-* [GitHub – SettingKey.kt](https://github.com/SLNE-Development/surf-settings/blob/version/26.1/surf-settings-api/src/main/kotlin/dev/slne/surf/settings/api/setting/SettingKey.kt)
+* [GitHub – SettingKey.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/settings/setting/SettingKey.kt)

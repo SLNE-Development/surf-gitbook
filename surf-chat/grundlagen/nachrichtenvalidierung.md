@@ -2,7 +2,7 @@
 icon: shield-check
 description: >-
   MessageValidationResult repräsentiert das Ergebnis einer Nachrichten-
-  prüfung. Es enthält alle möglichen Fehlertypen, die surf-chat beim
+  prüfung. Es enthält alle möglichen Fehlertypen, die der Chat von surf-player beim
   Verarbeiten einer Nachricht erkennt.
 ---
 
@@ -24,11 +24,16 @@ sealed class MessageValidationResult {
 ### Hilfsmethoden
 
 ```kotlin
-result.isSuccess()           // true, wenn die Validierung erfolgreich war
 result.isFailure()           // true, wenn ein Fehler aufgetreten ist
-result.getErrorOrNull()      // MessageValidationError oder null
 result.getErrorOrThrow()     // MessageValidationError oder IllegalStateException
+
+result is MessageValidationResult.Success                    // true, wenn die Validierung erfolgreich war
+(result as? MessageValidationResult.Failure)?.error          // MessageValidationError oder null
 ```
+
+{% hint style="info" %}
+`isSuccess()` und `getErrorOrNull()` gibt es in surf-player nicht mehr. Verwende stattdessen `!result.isFailure()` bzw. die Ausdrücke oben.
+{% endhint %}
 
 ### Beispiel
 
@@ -59,45 +64,16 @@ Alle Fehlertypen erben von `MessageValidationError` und besitzen:
 | ------------------ | ------------------------- | ------------------------------------------------------------- |
 | `EmptyContent`     | Kein Inhalt               | Die Nachricht ist leer                                        |
 | `TooManyCaps`      | Zu viele Großbuchstaben   | Zu viele Großbuchstaben im Text                               |
-| `DenylistedWord`   | Unerlaubtes Wort: \<wort> | Ein Wort aus der [Denylist](../funktionen/denylist.md) wurde erkannt |
-| `BadLink`          | Unerlaubter Link: \<url>  | Die Nachricht enthält einen nicht erlaubten Link              |
-| `BadCharacters`    | Unerlaubte Zeichen: \<c>  | Unerlaubte Sonderzeichen im Text                              |
-| `TooOften`         | Spam                      | Der Spieler schreibt zu schnell (Spam-Schutz)                 |
 | `AutoDisabled`     | Zu viele Spieler          | Chat wurde automatisch deaktiviert (z. B. Überlastung)        |
-| `ChatDisabled`     | Chat deaktiviert          | Der Chat wurde manuell deaktiviert                            |
+| `ChatDisabled`     | Chat deaktiviert          | Der Chat ist auf diesem Server deaktiviert                    |
 
-### DenylistedWord
-
-```kotlin
-data class DenylistedWord(val denylistEntry: DenylistEntry) : MessageValidationError(...)
-```
-
-Enthält den vollständigen [`DenylistEntry`](../funktionen/denylist.md), der den Treffer ausgelöst hat – inklusive der konfigurierten Moderationsmaßnahme.
-
-### BadLink
-
-```kotlin
-data class BadLink(val url: String) : MessageValidationError(...)
-```
-
-Gibt die genaue URL zurück, die den Fehler ausgelöst hat.
-
-### TooOften
-
-```kotlin
-data class TooOften(val next: Long) : MessageValidationError(...)
-```
-
-`next` enthält den Unix-Zeitstempel (in Millisekunden), ab wann der Spieler wieder schreiben darf.
-
-```kotlin
-// Beispiel: Countdown anzeigen
-val waitSeconds = (error.next - System.currentTimeMillis()) / 1000
-player.sendMessage("Bitte warte noch ${waitSeconds}s.")
-```
+{% hint style="warning" %}
+Die Fehlertypen `DenylistedWord`, `BadLink`, `BadCharacters` und `TooOften` gibt es in surf-player nicht mehr, da diese Prüfungen (Denylist, Link- und Zeichenprüfung) entfallen sind. Ein exhaustives `when` über `MessageValidationError` muss nur noch die vier Fehlerklassen oben behandeln. `MessageValidationError` ist jetzt eine eigene Klasse im Paket `dev.slne.surf.player.api.chat.message` und nicht mehr in `MessageValidationResult` verschachtelt.
+{% endhint %}
 
 ---
 
 ## Externe Links
 
-* [GitHub – MessageValidationResult.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/MessageValidationResult.kt)
+* [GitHub – MessageValidationResult.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/MessageValidationResult.kt)
+* [GitHub – MessageValidationError.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/MessageValidationError.kt)

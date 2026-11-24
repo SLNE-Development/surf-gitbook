@@ -7,7 +7,7 @@ icon: list
 
 # SettingKeys
 
-Das Objekt `SettingKeys` enthält alle standardmäßig registrierten [`SettingKey`](setting-key.md)-Instanzen des Surf-Plugins. Es dient als einzige Quelle der Wahrheit für die Schlüsselnamen und Standardwerte.
+Das Objekt `SettingKeys` enthält alle standardmäßig registrierten [`SettingKey`](setting-key.md)-Instanzen von surf-player. Es dient als einzige Quelle der Wahrheit für die Schlüsselnamen und Standardwerte.
 
 ## Chat
 
@@ -35,6 +35,7 @@ Das Objekt `SettingKeys` enthält alle standardmäßig registrierten [`SettingKe
 
 | Key                           | Typ       | Standard | Beschreibung                                          |
 | ----------------------------- | --------- | -------- | ----------------------------------------------------- |
+| `FRIEND_REQUESTS`             | `Boolean` | `true`   | Spieler nimmt Freundschaftsanfragen an (wird vom Microservice durchgesetzt) |
 | `FRIEND_REQUEST_NOTIFICATIONS`| `Boolean` | `true`   | Freundschaftsanfragen-Benachrichtigungen aktiviert     |
 | `FRIEND_NOTIFICATIONS`        | `Boolean` | `true`   | Allgemeine Freund-Benachrichtigungen aktiviert         |
 | `FRIEND_SOUNDS`               | `Boolean` | `true`   | Töne bei Freundschaftsereignissen aktiviert            |
@@ -45,14 +46,27 @@ Das Objekt `SettingKeys` enthält alle standardmäßig registrierten [`SettingKe
 | --------------- | --------- | -------- | ------------------------------------------------- |
 | `SHOW_NAMETAGS` | `Boolean` | `true`   | Namensschilder anderer Spieler werden angezeigt   |
 
+## Queue
+
+| Key                          | Typ       | Standard | Beschreibung                                         |
+| ---------------------------- | --------- | -------- | ---------------------------------------------------- |
+| `AUTO_QUEUE_AFTER_RECONNECT` | `Boolean` | `true`   | Spieler wird nach einem Reconnect automatisch in die Warteschlange gestellt |
+
+{% hint style="info" %}
+Der frühere Key `SHOW_SCOREBOARD` (`scoreboard:show-scoreboard`) wurde entfernt.
+{% endhint %}
+
 ## Verwendung
 
 ```kotlin
-import dev.slne.surf.settings.api.SurfSettingsApi
-import dev.slne.surf.settings.api.setting.SettingKeys
+import dev.slne.surf.player.api.settings.SurfSettingsApi
+import dev.slne.surf.player.api.settings.setting.SettingKeys
 
 // Wert eines Schlüssels lesen
 val showPings: Boolean = SurfSettingsApi.getSettingValue(player.uniqueId, SettingKeys.CHAT_PINGS)
+
+// Dasselbe über den Spieler (SettingsCapability)
+val showPings2: Boolean = SurfPlayerApi.player(player.uniqueId).setting(SettingKeys.CHAT_PINGS)
 ```
 
 {% hint style="warning" %}
@@ -61,4 +75,4 @@ Erstelle keine eigenen Keys mit denselben Namespace-Pfaden wie die vordefinierte
 
 ## Externe Links
 
-* [GitHub – SettingKeys.kt](https://github.com/SLNE-Development/surf-settings/blob/version/26.1/surf-settings-api/src/main/kotlin/dev/slne/surf/settings/api/setting/SettingKeys.kt)
+* [GitHub – SettingKeys.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/settings/setting/SettingKeys.kt)

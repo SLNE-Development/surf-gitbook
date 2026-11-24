@@ -41,12 +41,7 @@ Redirectoren werden über `SurfChatApi.registerMessageRedirector(...)` registrie
 SurfChatApi.registerMessageRedirector(myRedirector)
 ```
 
-Intern werden sie in der `MessageRedirectorRegistry` gehalten:
-
-```kotlin
-// Alle registrierten Redirectoren
-MessageRedirectorRegistry.redirectors
-```
+Die Verwaltung der Redirectoren erfolgt intern; es gibt keinen direkten Zugriff auf die Liste der registrierten Redirectoren.
 
 ---
 
@@ -78,23 +73,12 @@ SurfChatApi.registerMessageRedirector(DiscordChatRedirector)
 
 ## MessageRedirectorRegistry
 
-Die Registry verwaltet alle aktiven Redirectoren und kann zur Laufzeit modifiziert werden:
-
-```kotlin
-// Redirector direkt registrieren (entspricht SurfChatApi.registerMessageRedirector)
-MessageRedirectorRegistry.register(myRedirector)
-
-// Alle Redirectoren entfernen
-MessageRedirectorRegistry.clear()
-```
-
 {% hint style="warning" %}
-`MessageRedirectorRegistry.clear()` entfernt **alle** registrierten Redirectoren. Nutze diese Methode nur, wenn du die vollständige Kontrolle über alle Redirectoren hast.
+`MessageRedirectorRegistry` (`register`, `clear`, `redirectors`) ist in surf-player nicht mehr Teil der öffentlichen API. Nutze `SurfChatApi.registerMessageRedirector(...)`.
 {% endhint %}
 
 ---
 
 ## Externe Links
 
-* [GitHub – MessageRedirector.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/redirector/MessageRedirector.kt)
-* [GitHub – MessageRedirectorRegistry.kt](https://github.com/SLNE-Development/surf-chat/blob/version/26.1/surf-chat-api/src/main/kotlin/dev/slne/surf/chat/api/message/redirector/MessageRedirectorRegistry.kt)
+* [GitHub – MessageRedirector.kt](https://github.com/SLNE-Development/surf-player/blob/version/26.3/api/src/main/kotlin/dev/slne/surf/player/api/chat/message/redirector/MessageRedirector.kt)
